@@ -1,0 +1,140 @@
+%\documentclass[a4paper]{scrartcl}
+\documentclass[a4paper]{article}
+\usepackage{setspace}
+\usepackage{url}
+\usepackage{mdwlist}
+\usepackage{polski}
+\usepackage[utf8x]{inputenc}
+\usepackage{color}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[unicode=true]{hyperref}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{subfig}
+\usepackage{listings}
+\definecolor{dkgreen}{rgb}{0.2,0.8,0.2}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+  basicstyle=\ttfamily\footnotesize,
+  numbers=left,
+  numberstyle=\footnotesize,
+  stepnumber=1,
+  numbersep=5pt,
+  breaklines=true,
+  tabsize=2,
+  showspaces=false,
+  showstringspaces=false,
+  frame=single,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{mauve},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\isod}{\textbf{ISOD}}
+
+\begin{document}
+\begin{titlepage}
+
+  \begin{center}
+
+
+    % Upper part of the page
+    \includegraphics[width=0.3\textwidth]{logo.jpg}\\[1cm]
+
+    \begin{onehalfspace}
+      \textsc{\LARGE Wydział Elektryczny Politechniki Warszawskiej}\\[1.5cm]
+    \end{onehalfspace}
+
+
+
+    \textsc{\Large Praca Inżynierska}\\[0.5cm]
+
+    % Title
+    \HRule \\[0.4cm]
+    {\huge \bfseries Społecznościowa baza wiedzy}\\[0.2cm]
+    \HRule \\[1.5cm]
+
+    % Author and supervisor
+    \begin{flushleft} \large
+      \emph{Autor:}\\
+      dr~inż. Robert \textsc{Szmurło} \\
+      Barnaba \textsc{Turek}
+    \end{flushleft}
+    \vfill
+
+    % Bottom of the page
+    {\large \today}
+
+  \end{center}
+
+\end{titlepage}
+\sloppy
+
+\setcounter{tocdepth}{4}
+\tableofcontents
+
+\section{Wstęp}
+\section{Wybór technologii}
+Ponieważ celem projektu było utworzenie systemu, który będzie utrzymywany i~używany na uczelni, zdecydowałem się na środowisko związane z~maszyną\emph{JVM}.
+Środowisko to jest dojrzałe, rozwijane od wielu lat i~z~powodzeniem wdrażane w~największych firmach teleinformatycznych.
+%Źródła!
+Z~tego samego środowiska korzysta \isod, można więc zakładać, że ułatwi to wdrożenie systemu na uczelni oraz jego późniejszy rozwój.
+
+Chciałem też poznać któryś z~nowoczesnych statycznie typowanych języków opartych o~JVM implementujących paradygmat funkcyjny.
+
+Takie postawienie problemu zawęziło listę języków do dwóch: \emph{Clojure} i~\emph{Scala}.
+
+Wykonałem zestawienie dostępnych frameworków, z~uwzględnieniem następujących cech:
+
+\begin{description}
+  \item[I18n] - dostępność rozwiązania do tłumaczenia strony.
+  \item[REPL] - dostępność interaktywnego interpreteraa pozwalającego na interakcje z~modelami.
+  \item[Hype] - liczbę osób obserwujących repozytorium projektu (heurystyka popularności).
+  \item[SLOC] - liczbę linii kodu projektu.
+  \item[doc] - stosunek liczby wierszy kodu do liczby wierszy dokumentacji.
+  \item[stack] - liczbę wyników wyszukiwania na portalu stackoverflow.com związanych z~danym frameworkiem.
+\end{description}
+
+\begin{table}[h]
+  \centering
+  \rowcolors{1}{white}{lightgray}
+  \begin{tabular}{|r|c|c|c|c|c|c|}
+    \hline
+    Framework & I18n & REPL & Hype & SLOC & doc  & stack \\ \hline
+    compojure & brak & brak & 1046 & 0.3k & brak & 143 \\ \hline
+    Conjure   & brak & tak  & 199  & 14k  & podstawowa & 102 \\ \hline
+    Noir & brak & brak  & 445 & 2k & ? podstawowa & 59 \\ \hline
+  \end{tabular}
+  \caption{ Wybrane frameworki oparte na języku Clojure}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \rowcolors{1}{white}{lightgray}
+  \begin{tabular}{|r|c|c|c|c|c|c|}
+    \hline
+    Framework & I18n & REPL & Hype & SLOC & doc  & stack \\ \hline
+    Lift & tak & tak & 421 & 181k & b. rozbudowana & 2000 \\ \hline
+    Play!\footnote{wliczając Javę} & tak & tak & 1137 & 200k & b. rozbudowana & 4300 \\ \hline
+    Bowler & cząstkowa & nie & 115 & 11k & podstawowa & 34\\ \hline
+  \end{tabular}
+  \caption{ Wybrane frameworki oparte na języku Scala}
+\end{table}
+
+Dość jasno rysuje się podział na frameworki bardziej i~mniej złożone.
+Scala wydaje się prowadzić jeśli chodzi o~te bardziej złożone frameworki.
+
+Wydaje mi się, że bardziej rozbudowany framework lepiej sprawdzi się podczas realizacji tego portalu.
+Wiele zadań to dość typowe w~przypadku aplikacji internetowych zadania związane z~wyświetlaniem i~edycją zasobów.
+Rozbudowane frameworki często posiadają narzędzia pozwalające uprościć rozwiązywanie takich zadań.
+%Źródło
+
+Niezbędna jest też jak najlepsza obsługa I18n, gdyż aplikacja będzie od razu dostępna w~dwóch wersjach językowych.
+Po zawężeniu listy do popularnych, udokumentowanych i~rozbudowanych frameworków \emph{Lift} i~\emph{Play!} zdecydowałem się na \emph{Lift} ze względu na to, że jest pisany w~całości w~języku Scala -- łatwiej mi będzie w~razie potrzeby przeglądać jego kod.
+
+\section{Metodyka wytwarzania oprogramowania}
+\section{Kwestie społeczne}
+\end{document}
